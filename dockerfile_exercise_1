@@ -1,0 +1,19 @@
+FROM debian:jessie-slim
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        cowsay \
+        screenfetch && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV PATH "$PATH:/usr/games"
+
+#CMD Command instruction can be overriden by command args in the docker run command that spins up a container
+#CMD ["cowsay", "To improve is to change; to be perfect is to change often"]
+
+#ENTRYPOINT Command instruction cannot be overriden by command args in the docker run command that spins up a container  
+#ENTRYPOINT [ "cowsay" ]
+
+#CMD and ENTRYPOINT instructions can work in tandem. CMD below defines default args for ENTRYPOINT instruction but can be overriden.
+CMD ["-f", "tux", "To improve is to change; to be perfect is to change often"]
+ENTRYPOINT [ "cowsay" ]
